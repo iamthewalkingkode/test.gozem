@@ -1,0 +1,52 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Package {
+  package_id    String     @id @default(auto()) @map("_id") @db.ObjectId
+  description   String
+  weight        Int
+  width         Int
+  height        Int
+  depth         Int
+  from_name     String
+  from_address  String
+  from_location Json       @default("{ \"lat\": \"\",\"lng\": \"\" }")
+  to_name       String
+  to_address    String
+  to_location   Json       @default("{ \"lat\": \"\",\"lng\": \"\" }")
+  delivery      Delivery[] @relation("DeliveryPackage")
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt()
+}
+
+model Delivery {
+  delivery_id String         @id @default(auto()) @map("_id") @db.ObjectId
+  package_id  String         @db.ObjectId
+  pickup_time DateTime
+  start_time  DateTime
+  end_time    DateTime
+  location    Json           @default("{ \"lat\": \"\",\"lng\": \"\" }")
+  status      DeliveryStatus @default(OPEN)
+  package     Package?       @relation("DeliveryPackage", fields: [package_id], references: [package_id])
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt()
+}
+
+enum DeliveryStatus {
+  OPEN
+  PICKED_UP
+  IN_TRANSIT
+  DELIVERED
+  FAILED
+}
