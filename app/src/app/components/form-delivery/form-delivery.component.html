@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>Create a delivery</h2>
+@if(submitting) {
+<div class="col-span-12">
+    <mat-progress-bar mode="query"></mat-progress-bar>
+</div>
+}
+<mat-dialog-content>
+    <form [formGroup]="v" (ngSubmit)="submit()">
+        <div class="grid grid-cols-2 gap-4 mt-4">
+            <div class="col-span-2">
+                <mat-form-field class="w-full">
+                    <mat-label>Select a package</mat-label>
+                    <input type="text" matInput [matAutocomplete]="auto" formControlName="package_id">
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                        @for (option of data.packages; track option) {
+                        <mat-option [value]="option">
+                            <span>{{option.description}}</span> |
+                            <small>From: {{option.from_name}}</small> |
+                            <small>To: {{option.to_name}}</small>
+                        </mat-option>
+                        }
+                    </mat-autocomplete>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="flex justify-between w-full">
+            <div></div>
+            <button mat-flat-button type="submit" color="primary" [disabled]="submitting">
+                &nbsp;&nbsp; Submit &nbsp; &nbsp;
+            </button>
+        </div>
+    </form>
+</mat-dialog-content>

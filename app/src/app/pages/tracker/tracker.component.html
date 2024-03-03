@@ -1,0 +1,96 @@
+<div class="grid grid-cols-12 gap-6">
+    <div class="col-span-12">
+        <form [formGroup]="v" (ngSubmit)="fetchPackage()">
+            <div class="grid grid-cols-12 gap-4 mt-4">
+                <div class="col-span-3"></div>
+                <div class="col-span-4">
+                    <mat-form-field class="w-full">
+                        <mat-label>Enter package ID</mat-label>
+                        <input matInput formControlName="package_id" />
+                    </mat-form-field>
+                </div>
+                <div class="col-span-2">
+                    <button mat-flat-button color="primary" type="submit" class="w-full">
+                        &nbsp;&nbsp; Track &nbsp; &nbsp;
+                    </button>
+                </div>
+                <div class="col-span-3"></div>
+            </div>
+        </form>
+    </div>
+    @if(searching) {
+    <div class="col-span-12">
+        <mat-progress-bar mode="query"></mat-progress-bar>
+    </div>
+    }
+    <div class="col-span-1"></div>
+    @if(package) {
+    <div class="col-span-4">
+        <div class="text-lg font-medium mb-4 border-b pb-3">Package Details</div>
+        <div class="grid grid-cols-12 mb-2">
+            <div class="col-span-3"><span class="font-medium">Description:</span></div>
+            <div class="col-span-8">{{package.description}}</div>
+        </div>
+        <div class="grid grid-cols-12 mb-2">
+            <div class="col-span-3"><span class="font-medium">From name:</span></div>
+            <div class="col-span-8">{{package.from_name}}</div>
+        </div>
+        <div class="grid grid-cols-12 mb-2">
+            <div class="col-span-3"><span class="font-medium">From address:</span></div>
+            <div class="col-span-8">{{package.from_address}}</div>
+        </div>
+        <div class="grid grid-cols-12 mb-2">
+            <div class="col-span-3"><span class="font-medium">To name:</span></div>
+            <div class="col-span-8">{{package.to_name}}</div>
+        </div>
+        <div class="grid grid-cols-12 mb-2">
+            <div class="col-span-3"><span class="font-medium">To name:</span></div>
+            <div class="col-span-8">{{package.to_address}}</div>
+        </div>
+        <div class="grid grid-cols-12 mb-2">
+            <div class="col-span-3"><span class="font-medium">Weight:</span></div>
+            <div class="col-span-8">{{package.weight}}g</div>
+        </div>
+        <div class="grid grid-cols-12 mb-2">
+            <div class="col-span-3"><span class="font-medium">Width:</span></div>
+            <div class="col-span-8">{{package.width}}cm</div>
+        </div>
+        <div class="grid grid-cols-12 mb-2">
+            <div class="col-span-3"><span class="font-medium">Height:</span></div>
+            <div class="col-span-8">{{package.width}}cm</div>
+        </div>
+        <div class="grid grid-cols-12 mb-2">
+            <div class="col-span-3"><span class="font-medium">Depth:</span></div>
+            <div class="col-span-8">{{package.depth}}cm</div>
+        </div>
+
+
+        @if(package.delivery && package.delivery.delivery_id) {
+        <div class="text-lg font-medium mb-4 mt-12 border-b pb-3">Delivery Details</div>
+        <div class="grid grid-cols-12 mb-2">
+            <div class="col-span-3"><span class="font-medium">Status:</span></div>
+            <div class="col-span-8">{{package.delivery.status}}</div>
+        </div>
+       <div class="grid grid-cols-12 mb-2">
+            <div class="col-span-3"><span class="font-medium">Pickup time:</span></div>
+            <div class="col-span-8">{{package.delivery.status !== 'OPEN' ? package.delivery.pickup_time : '-'}}</div>
+        </div>
+        <div class="grid grid-cols-12 mb-2">
+            <div class="col-span-3"><span class="font-medium">Start time:</span></div>
+            <div class="col-span-8">{{['DELIVERED', 'FAILED', 'IN_TRANSIT'].includes(package.delivery.status) ? package.delivery.start_time : '-'}}</div>
+        </div>
+        <div class="grid grid-cols-12 mb-2">
+            <div class="col-span-3"><span class="font-medium">End time:</span></div>
+            <div class="col-span-8">{{['DELIVERED', 'FAILED'].includes(package.delivery.status) ? package.delivery.end_time : '-'}}</div>
+        </div>
+        }
+    </div>
+
+    <div class="col-span-1"></div>
+
+    <div class="col-span-6">
+        <app-map size="large" [markers]="markers" [showMyLocation]="false" />
+    </div>
+    }
+
+</div>

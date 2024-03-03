@@ -1,0 +1,85 @@
+<h2 mat-dialog-title>Create a delivery</h2>
+<mat-dialog-content>
+    <mat-stepper orientation="vertical" [linear]="true" #stepper>
+        <mat-step [stepControl]="v.package" label="Package">
+            <form [formGroup]="v.package">
+                <div class="grid grid-cols-2 gap-4 mt-4">
+                    <div class="col-span-2">
+                        <mat-form-field class="w-full">
+                            <mat-label>Select a package</mat-label>
+                            <input type="text" matInput [matAutocomplete]="auto" formControlName="package_id">
+                            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                                @for (option of data.packages; track option) {
+                                <mat-option [value]="option">
+                                    <span>{{option.description}}</span> |
+                                    <small>From: {{option.from_name}}</small> |
+                                    <small>To: {{option.to_name}}</small>
+                                </mat-option>
+                                }
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="flex justify-between w-full">
+                    <div></div>
+                    <button mat-flat-button color="primary" matStepperNext>
+                        &nbsp;&nbsp; Next &nbsp; &nbsp;
+                    </button>
+                </div>
+            </form>
+        </mat-step>
+
+        <!-- <mat-step [stepControl]="v.time" label="Time">
+            <form [formGroup]="v.time">
+                <div class="grid grid-cols-2 gap-4 mt-4">
+                    <div class="col-span-1">
+                        <mat-form-field class="w-full">
+                            <mat-label>Pickup time</mat-label>
+                            <input matInput [matDatepicker]="picker1" formControlName="pickup_time" readonly />
+                            <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-span-1">
+                        <mat-form-field class="w-full">
+                            <mat-label>Start time</mat-label>
+                            <input matInput [matDatepicker]="picker2" formControlName="start_time" readonly />
+                            <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-span-1">
+                        <mat-form-field class="w-full">
+                            <mat-label>End time</mat-label>
+                            <input matInput [matDatepicker]="picker3" formControlName="end_time" readonly />
+                            <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
+                            <mat-datepicker #picker3></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="flex justify-between w-full">
+                    <button mat-button type="button" matStepperPrevious>
+                        &nbsp;&nbsp; Previous &nbsp; &nbsp;
+                    </button>
+                    <button mat-flat-button color="primary" matStepperNext>
+                        &nbsp;&nbsp; Next &nbsp; &nbsp;
+                    </button>
+                </div>
+            </form>
+        </mat-step> -->
+
+        <!-- <mat-step label="Location">
+            <form (ngSubmit)="submit()">
+                <app-map (location)="setLocation($event)" />
+                <div class="flex justify-between w-full mt-6">
+                    <button mat-button type="button" matStepperPrevious>
+                        &nbsp;&nbsp; Previous &nbsp; &nbsp;
+                    </button>
+                    <button mat-flat-button color="primary">
+                        &nbsp;&nbsp; Submit &nbsp; &nbsp;
+                    </button>
+                </div>
+            </form>
+        </mat-step> -->
+    </mat-stepper>
+</mat-dialog-content>

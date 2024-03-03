@@ -1,0 +1,9 @@
+.mapx {
+    height: 350px;
+    background-color: #efefef;
+    border-radius: 6px;
+
+    &.large {
+        height: 55vh;
+    }
+}

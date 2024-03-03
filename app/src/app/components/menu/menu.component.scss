@@ -1,0 +1,11 @@
+.nav-item {
+    cursor: pointer;
+    padding: 6px 12px;
+    border-bottom: 2px solid #fff;
+
+    &:hover,
+    &.active {
+        color: #179138;
+        border-bottom: 2px solid #179138;
+    }
+}
