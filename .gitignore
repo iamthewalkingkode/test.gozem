@@ -395,7 +395,6 @@ Temporary Items
 
 =======
 # Local
-.env
 dist
 
 # Elastic Beanstalk Files

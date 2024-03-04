@@ -3,14 +3,13 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import expressPinoLogger from 'express-pino-logger';
 import 'module-alias/register';
+import { Server } from 'socket.io';
 
 import config from '@/config';
 import routes from '@/routes';
 import { types } from '@/utils/index';
 import logger from '@/middlewares/logger.middleware';
 import socketIO from './socket';
-
-const socket = require('socket.io');
 
 const app = express();
 
@@ -33,7 +32,7 @@ app.use((error: Error, _: express.Request, res: express.Response, __: express.Ne
 
 const server = app.listen(config.APP_PORT, () => logger.info(`🚀 Server ready at: ${config.APP_PORT}`));
 
-const io = socket(server);
+const io = new Server(server);
 socketIO(io);
 routes(app);
 
