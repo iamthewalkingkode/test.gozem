@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { models } from '../../utils';
+import { helpers, models } from '../../utils';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PackageService {
-
-  // private baseUrl = process.env['API_URL'];
-  private baseUrl = 'http://localhost:3134/api';
+  
+  private baseUrl = `${helpers.apiBaseURL}/api`;
 
   constructor() { }
 

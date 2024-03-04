@@ -1,3 +1,5 @@
+export const apiBaseURL = 'https://test-gozem-api.thewalkingkode.com';
+
 export const copyObject = (data: any) => JSON.parse(JSON.stringify(data));
 
 export const randCode = (length = 6) => {
@@ -17,7 +19,6 @@ export const ucWords = (str: string) => str ? str.split(' ').map(str => { return
 
 export const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text).then((_) => {
-        // notification.success({ message: `Copied` });
         console.log(text)
     });
 }

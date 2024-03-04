@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Socket, io } from 'socket.io-client';
-import { models } from '../../utils';
+import { helpers, models } from '../../utils';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class SocketService {
   private socket: Socket;
 
   constructor() {
-    this.socket = io('http://localhost:3134', {
+    this.socket = io(helpers.apiBaseURL, {
       transports: ['websocket'],
       reconnection: false,
       rejectUnauthorized: false,
