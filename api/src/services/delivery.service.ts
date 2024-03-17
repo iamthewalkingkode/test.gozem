@@ -40,4 +40,5 @@ export const update = async (id: string, payload: { status?: DeliveryStatus; loc
         where: { delivery_id: id },
         data: dataToUpdate,
     });
+    return await findOrThrow(id);
 }

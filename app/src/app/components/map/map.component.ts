@@ -21,7 +21,7 @@ export class MapComponent {
   @Output() location: EventEmitter<any> = new EventEmitter();
 
   id = helpers.randCode(12);
-  zoom = 30;
+  zoom = 16;
   locating: boolean = true;
   refreshInt: any;
 
@@ -97,6 +97,8 @@ export class MapComponent {
       //   self.location.emit(helpers.copyObject(markerLocation));
       // });
       this.locating = false;
+    }, (e) => {
+      console.log(e);
     });
   }
 

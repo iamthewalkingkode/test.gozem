@@ -71,9 +71,12 @@ export class TrackerComponent {
 
             this._io.receive(models.ioEvents.delivery_updated, (msg) => {
               if (this.package && this.package.delivery && msg.delivery_id === res.delivery.delivery_id) {
-                console.log(models.ioEvents.delivery_updated, msg)
+                // console.log(models.ioEvents.delivery_updated, msg);
                 this.package.delivery['status'] = msg.status || this.package.delivery.status;
                 this.package.delivery['location'] = msg.location || this.package.delivery.location;
+                this.package.delivery['end_time'] = moment(msg.end_time || this.package.delivery.end_time).format('LLL');
+                this.package.delivery['start_time'] = moment(msg.start_time || this.package.delivery.start_time).format('LLL');
+                this.package.delivery['pickup_time'] = moment(msg.pickup_time || this.package.delivery.pickup_time).format('LLL');
                 this.markers[2] = {
                   ...this.markers[2],
                   lat: this.markers[2].lat,

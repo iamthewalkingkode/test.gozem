@@ -11,9 +11,9 @@ export class SocketService {
 
   constructor() {
     this.socket = io(helpers.apiBaseURL, {
-      transports: ['websocket'],
+      transports: ['polling'],
       reconnection: false,
-      rejectUnauthorized: false,
+      // rejectUnauthorized: false,
     });
   }
 

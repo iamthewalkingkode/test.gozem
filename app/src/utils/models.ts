@@ -62,4 +62,7 @@ export interface ioPayload {
     status?: DeliveryStatus;
     location?: Location;
     delivery_id: string;
+    end_time?: string;
+    start_time?: string;
+    pickup_time?: string;
 }
